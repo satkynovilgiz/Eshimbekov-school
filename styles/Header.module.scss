@@ -67,4 +67,52 @@
       color: var(--bg-color);
     }
   }
+
+  /* Стили для select выбора языка */
+  .languageSelect {
+    position: relative;
+    width: 150px;
+    border: none;
+
+    select {
+      width: 100%;
+      padding: 10px 40px 10px 15px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+      &:hover {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 8px rgba(239, 35, 60, 0.5);
+        background-color: #303447; /* если не используешь lighten */
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 10px rgba(239, 35, 60, 0.8);
+        background-color: #3b3f58; /* если не используешь lighten */
+      }
+    }
+
+    &::after {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 8px solid var(--accent-color);
+      transition: border-top-color 0.3s ease;
+    }
+  }
 }
