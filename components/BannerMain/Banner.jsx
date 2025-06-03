@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import styles from '@/styles/banner.module.scss';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function Banner() {
   const [banners, setBanners] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/banners/')
+    fetch(`${API_URL}/banners/`)
       .then(res => res.json())
       .then(setBanners)
       .catch(console.error);
@@ -28,7 +30,7 @@ export default function Banner() {
       {banners.map((banner) => (
         <div key={banner.id} className={styles.slide}>
           <img
-            src={banner.image.startsWith('http') ? banner.image : `http://127.0.0.1:8000${banner.image}`}
+            src={banner.image.startsWith('http') ? banner.image : `${API_URL.replace('/api', '')}${banner.image}`}
             alt="img"
             className={styles.image}
           />
@@ -42,7 +44,6 @@ export default function Banner() {
             )}
           </div>
         </div>
-        //creted
       ))}
     </Slider>
   );
