@@ -42,6 +42,7 @@ export default function Banner() {
             )}
           </div>
         </div>
+        //creted
       ))}
     </Slider>
   );
