@@ -1,0 +1,54 @@
+.detail {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem 3rem;
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  color: #222;
+}
+
+.photo {
+  flex-shrink: 0;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 6px 16px rgba(0, 112, 243, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.photo:hover {
+  transform: scale(1.05);
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #0a0a0a;
+}
+
+.subject {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0070f3;
+  margin-bottom: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bio {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #444;
+  white-space: pre-wrap;
+}

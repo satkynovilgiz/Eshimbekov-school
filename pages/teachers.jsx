@@ -1,0 +1,36 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import styles from '@/styles/teachers.module.scss';
+
+export default function Teachers() {
+  const [teachers, setTeachers] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/teachers/')
+      .then(res => res.json())
+      .then(setTeachers)
+      .catch(console.error);
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <h1>Преподаватели</h1>
+      <div className={styles.grid}>
+        {teachers.map(teacher => (
+          <div
+            className={styles.card}
+            key={teacher.id}
+            onClick={() => router.push(`/teachers/${teacher.id}`)}
+          >
+            {teacher.photo && (
+              <img src={teacher.photo} alt={teacher.name} className={styles.image} />
+            )}
+            <h2>{teacher.name}</h2>
+            <p>{teacher.subject}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

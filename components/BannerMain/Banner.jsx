@@ -1,0 +1,48 @@
+import { useEffect, useState } from 'react';
+import Slider from 'react-slick';
+import styles from '@/styles/banner.module.scss';
+
+export default function Banner() {
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/banners/')
+      .then(res => res.json())
+      .then(setBanners)
+      .catch(console.error);
+  }, []);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+
+  return (
+    <Slider {...settings} className={styles.carousel}>
+      {banners.map((banner) => (
+        <div key={banner.id} className={styles.slide}>
+          <img
+            src={banner.image.startsWith('http') ? banner.image : `http://127.0.0.1:8000${banner.image}`}
+            alt="img"
+            className={styles.image}
+          />
+          <div className={styles.overlay}>
+            <h2 className={styles.title}>{banner.title}</h2>
+            {banner.subtitle && <p className={styles.subtitle}>{banner.subtitle}</p>}
+            {banner.button_url && banner.button_text && (
+              <a href={banner.button_url} className={styles.button}>
+                {banner.button_text}
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </Slider>
+  );
+}
