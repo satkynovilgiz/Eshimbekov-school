@@ -26,7 +26,7 @@ export default function Teachers() {
             onClick={() => router.push(`/teachers/${teacher.id}`)}
           >
             {teacher.photo && (
-              <img
+              <img 
                 src={
                   teacher.photo.startsWith('http')
                     ? teacher.photo

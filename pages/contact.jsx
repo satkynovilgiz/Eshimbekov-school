@@ -1,30 +1,86 @@
+import React, { useState } from 'react';
 import styles from '@/styles/Contact.module.scss';
 
-export default function Contact() {
+function ContactForm() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [response, setResponse] = useState(null);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:8000/api/contact/send/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setResponse({ type: 'success', message: data.success });
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setResponse({ type: 'error', message: data.error });
+      }
+    } catch (error) {
+      setResponse({ type: 'error', message: 'Ошибка при отправке' });
+    }
+  };
+
   return (
-    <div className={styles.contact}>
+    <section className={styles.contact}>
       <div className={styles.container}>
-        <h1>Свяжитесь с нами</h1>
-        <p className={styles.subtitle}>
-          У вас есть вопросы? Мы с радостью ответим!
-        </p>
+        <h1>Связаться с нами</h1>
+        <p className={styles.subtitle}>Заполните форму ниже — мы ответим вам в ближайшее время</p>
 
         <div className={styles.content}>
-          <form className={styles.form}>
-            <input type="text" placeholder="Ваше имя" required />
-            <input type="email" placeholder="Ваш email" required />
-            <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Ваше имя"
+              required
+            />
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Ваш email"
+              required
+            />
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              placeholder="Сообщение"
+              rows={5}
+              required
+            />
             <button type="submit">Отправить</button>
+            {response && (
+              <p style={{ color: response.type === 'success' ? 'green' : 'red' }}>
+                {response.message}
+              </p>
+            )}
           </form>
 
           <div className={styles.info}>
-            <h3>Контактная информация</h3>
-            <p>📍 Бишкек, Кыргызстан</p>
-            <p>📞 +996 700 123 456</p>
-            <p>✉️ info@example.com</p>
+            <h3>Контакты</h3>
+            <p>Адрес: г. Бишкек, ул. Образования 123</p>
+            <p>Телефон: +996 700 123 456</p>
+            <p>Email: info@eshimbekov.edu.kg</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
+
+export default ContactForm;
