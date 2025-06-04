@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '@/styles/newsDetail.module.scss';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function NewsDetail() {
   const router = useRouter();
   const { id } = router.query;
@@ -9,11 +11,14 @@ export default function NewsDetail() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`http://127.0.0.1:8000/api/news/${id}/`)
+    fetch(`${API_URL}/news/${id}/`)
       .then(res => res.json())
       .then(data => setNews(data))
       .catch(console.error);
   }, [id]);
+
+  const getImageUrl = (path) =>
+    path.startsWith('http') ? path : `${API_URL.replace('/api', '')}${path}`;
 
   if (!news) return <p>Загрузка...</p>;
 
@@ -23,7 +28,7 @@ export default function NewsDetail() {
       <h1 className={styles.title}>{news.title}</h1>
       {news.image && (
         <img
-          src={news.image}
+          src={getImageUrl(news.image)}
           alt={news.title}
           className={styles.image}
         />

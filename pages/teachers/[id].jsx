@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '@/styles/teacherDetail.module.scss';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
 export default function TeacherDetail() {
   const router = useRouter();
   const { id } = router.query;
@@ -9,7 +11,8 @@ export default function TeacherDetail() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`http://127.0.0.1:8000/api/teachers/${id}/`)
+
+    fetch(`${API_URL}/teachers/${id}/`)
       .then(res => res.json())
       .then(setTeacher)
       .catch(console.error);
@@ -20,7 +23,15 @@ export default function TeacherDetail() {
   return (
     <div className={styles.detail}>
       {teacher.photo && (
-        <img src={teacher.photo} alt={teacher.name} className={styles.photo} />
+        <img
+          src={
+            teacher.photo.startsWith('http')
+              ? teacher.photo
+              : `${API_URL.replace('/api', '')}${teacher.photo}`
+          }
+          alt={teacher.name}
+          className={styles.photo}
+        />
       )}
       <div className={styles.info}>
         <h1 className={styles.name}>{teacher.name}</h1>
