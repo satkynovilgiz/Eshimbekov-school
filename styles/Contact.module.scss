@@ -1,9 +1,10 @@
 .contact {
-  background: linear-gradient(135deg, #f9f9f9, #f1f5f9);
-  color: #1f2937;
+  background: linear-gradient(135deg, var(--bg-color), var(--bg-color));
+  color: var(--text-color);
   min-height: 100vh;
   padding: 4rem 1rem;
   font-family: 'Segoe UI', Roboto, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
 
   .container {
     max-width: 960px;
@@ -15,14 +16,14 @@
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.5rem;
-    color: #0f172a;
+    color: var(--text-color);
   }
 
   .subtitle {
     text-align: center;
     margin-bottom: 3rem;
     font-size: 1.125rem;
-    color: #475569;
+    color: var(--caption-color);
   }
 
   .content {
@@ -39,24 +40,27 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    background-color: white;
+    background-color: var(--item-bg-color);
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
     input,
     textarea {
       padding: 1rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--shadow-color-light);
       border-radius: 12px;
-      background-color: #f9fafb;
+      background-color: var(--item-bg-color-light);
       font-size: 1rem;
-      transition: border 0.2s ease;
+      color: var(--text-color);
+      transition: border 0.2s ease, background-color 0.3s ease;
 
       &:focus {
         outline: none;
-        border-color: #3b82f6;
-        background-color: #fff;
+        border-color: var(--accent-color);
+        background-color: var(--item-bg-color);
+        color: var(--text-color);
       }
     }
 
@@ -67,8 +71,8 @@
 
     button {
       padding: 1rem;
-      background-color: #3b82f6;
-      color: white;
+      background-color: var(--accent-color);
+      color: #fff;
       border: none;
       border-radius: 12px;
       font-weight: 600;
@@ -77,34 +81,35 @@
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #2563eb;
+        background-color: var(--accent-color-hover);
       }
     }
   }
 
   .info {
-    background-color: #ffffff;
+    background-color: var(--item-bg-color);
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 25px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
     h3 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: #1e293b;
+      color: var(--text-color);
     }
 
     p {
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
-      color: #475569;
+      color: var(--caption-color);
       display: flex;
       align-items: center;
       gap: 0.5rem;
 
       &::before {
         content: '•';
-        color: #3b82f6;
+        color: var(--accent-color);
         font-size: 1.5rem;
         line-height: 1;
       }

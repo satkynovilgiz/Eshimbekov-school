@@ -11,10 +11,10 @@ export default function About({ blocks }) {
           <p>Информация пока недоступна.</p>
         ) : (
           blocks.map((block, index) => (
-            <div key={index}>
+            <article key={index} className={styles.block}>
               <h2>{block.title}</h2>
               <p>{block.content}</p>
-            </div>
+            </article>
           ))
         )}
       </section>
@@ -22,11 +22,10 @@ export default function About({ blocks }) {
   );
 }
 
-
 export async function getServerSideProps() {
   try {
     const res = await fetch(`${API_URL}/about/`, {
-      headers: { 'Accept': 'application/json' },
+      headers: { Accept: 'application/json' },
     });
 
     if (!res.ok) {

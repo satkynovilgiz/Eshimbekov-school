@@ -20,24 +20,30 @@ export default function TeacherDetail() {
 
   if (!teacher) return <p>Загрузка...</p>;
 
-  return (
-    <div className={styles.detail}>
-      {teacher.photo && (
-        <img
-          src={
-            teacher.photo.startsWith('http')
-              ? teacher.photo
-              : `${API_URL.replace('/api', '')}${teacher.photo}`
-          }
-          alt={teacher.name}
-          className={styles.photo}
-        />
-      )}
-      <div className={styles.info}>
-        <h1 className={styles.name}>{teacher.name}</h1>
-        <p className={styles.subject}>{teacher.subject}</p>
-        <p className={styles.bio}>{teacher.bio}</p>
-      </div>
+return (
+  <div className={styles.detail}>
+    {teacher.photo ? (
+      <img
+        src={
+          teacher.photo.startsWith('http')
+            ? teacher.photo
+            : `${API_URL.replace('/api', '')}${teacher.photo}`
+        }
+        alt={teacher.name}
+        className={styles.photo}
+      />
+    ) : (
+      <div className={styles.photoPlaceholder}>Фото отсутствует</div>
+    )}
+
+    <div className={styles.info}>
+      <h1 className={styles.name}>{teacher.name}</h1>
+      <p className={styles.subject}>{teacher.subject || 'Предмет не указан'}</p>
+      <p className={styles.bio}>
+        {teacher.bio?.trim() ? teacher.bio : 'Описание пока отсутствует.'}
+      </p>
     </div>
-  );
+  </div>
+);
+
 }

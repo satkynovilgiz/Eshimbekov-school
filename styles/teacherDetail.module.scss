@@ -1,15 +1,18 @@
+$accent-color: #0070f3;
+$accent-color-dark: darken($accent-color, 20%); 
 .detail {
   max-width: 900px;
   margin: 4rem auto;
   padding: 2rem 3rem;
-  background-color: #fff;
+  background-color: var(--bg-color);
   border-radius: 14px;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
   display: flex;
   gap: 3rem;
   align-items: center;
   font-family: 'Inter', sans-serif;
-  color: #222;
+  color: var(--text-color);
+  flex-wrap: wrap;
 }
 
 .photo {
@@ -20,27 +23,44 @@
   object-fit: cover;
   box-shadow: 0 6px 16px rgba(0, 112, 243, 0.2);
   transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
-.photo:hover {
-  transform: scale(1.05);
+.photoPlaceholder {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: bold;
+  box-shadow: 0 6px 16px rgba(0, 112, 243, 0.15);
+  text-align: center;
 }
 
 .info {
   flex: 1;
+  min-width: 250px;
 }
 
 .name {
   font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #0a0a0a;
+  color: var(--text-color);
+  word-break: break-word;
 }
 
 .subject {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #0070f3;
+  color: var(--accent-color);
   margin-bottom: 1.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -49,6 +69,54 @@
 .bio {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #444;
+  color: var(--text-color);
   white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Адаптация под планшеты */
+@media (max-width: 768px) {
+  .detail {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .photo,
+  .photoPlaceholder {
+    margin-bottom: 1.5rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .subject {
+    font-size: 1.1rem;
+  }
+
+  .bio {
+    font-size: 1rem;
+  }
+}
+
+/* Адаптация под телефоны */
+@media (max-width: 480px) {
+  .name {
+    font-size: 1.6rem;
+  }
+
+  .subject {
+    font-size: 1rem;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+  }
+
+  .photo,
+  .photoPlaceholder {
+    width: 200px;
+    height: 200px;
+  }
 }

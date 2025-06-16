@@ -2,18 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Menu, X } from 'lucide-react';
 import styles from '@/styles/Header.module.scss';
 
 const LANGUAGES = [
   { code: 'ru', label: 'Русский' },
-  { code: 'en', label: 'English' }
+  { code: 'en', label: 'English' },
 ];
 
 export default function Header() {
-  const router = useRouter();
   const [theme, setTheme] = useState('light');
   const [language, setLanguage] = useState('ru');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
@@ -26,45 +26,33 @@ export default function Header() {
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+    setTheme(newTheme);
   };
 
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
     setLanguage(lang);
     localStorage.setItem('lang', lang);
-    // Добавь тут свою i18n логику
   };
 
-  // Функция для рендера ссылки с защитой от "хард навигации"
-  const NavLink = ({ href, children }) => {
-    const handleClick = (e) => {
-      if (router.asPath === href) {
-        e.preventDefault();
-      }
-    };
-
-    return (
-      <Link href={href} legacyBehavior>
-        <a onClick={handleClick} className={styles.navLink}>
-          {children}
-        </a>
-      </Link>
-    );
-  };
+  const NavLink = ({ href, children }) => (
+    <Link href={href} className={styles.navLink} onClick={() => setMenuOpen(false)}>
+      {children}
+    </Link>
+  );
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Link href="/" legacyBehavior>
-            <a>Kasymaly <span>Eshimbekov</span></a>
+          <Link href="/" className={styles.logoLink}>
+            Kasymaly <span>Eshimbekov</span>
           </Link>
         </div>
 
-        <nav>
+        <nav className={`${styles.nav} ${menuOpen ? styles.show : ''}`}>
           <NavLink href="/">Главная</NavLink>
           <NavLink href="/about">О школе</NavLink>
           <NavLink href="/teachers">Учителя</NavLink>
@@ -72,21 +60,32 @@ export default function Header() {
           <NavLink href="/contact">Контакты</NavLink>
         </nav>
 
-        <select
-          value={language}
-          onChange={handleLanguageChange}
-          // style={{border:"none"}}
-          className={styles.languageSelect}
-          aria-label="Выбор языка"
-        >
-          {LANGUAGES.map(lang => (
-            <option key={lang.code} value={lang.code}>{lang.label}</option>
-          ))}
-        </select>
+        <div className={styles.controls}>
+          <select
+            value={language}
+            onChange={handleLanguageChange}
+            className={styles.languageSelect}
+            aria-label="Выбор языка"
+          >
+            {LANGUAGES.map((lang) => (
+              <option key={lang.code} value={lang.code}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
 
-        <button onClick={toggleTheme} className={styles.themeToggle}>
-          {theme === 'light' ? '🌙' : '☀️'}
-        </button>
+          <button onClick={toggleTheme} className={styles.themeToggle} aria-label="Переключить тему">
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className={styles.burger}
+            aria-label="Меню"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
     </header>
   );

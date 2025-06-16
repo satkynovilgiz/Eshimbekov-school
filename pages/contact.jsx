@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from '@/styles/Contact.module.scss';
 
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 function ContactForm() {
@@ -15,7 +14,7 @@ function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await fetch(`${API_URL}/contact/send/`, {
+      const res = await fetch(`${API_URL}/contact/send/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,6 +34,13 @@ function ContactForm() {
     }
   };
 
+  const handleKeyDown = (e) => {
+    // Отправляем форму при нажатии Enter, только если не в textarea
+    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+      handleSubmit(e);
+    }
+  };
+
   return (
     <section className={styles.contact}>
       <div className={styles.container}>
@@ -42,7 +48,7 @@ function ContactForm() {
         <p className={styles.subtitle}>Заполните форму ниже — мы ответим вам в ближайшее время</p>
 
         <div className={styles.content}>
-          <form onSubmit={handleSubmit} className={styles.form}>
+          <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className={styles.form}>
             <input
               name="name"
               value={form.name}

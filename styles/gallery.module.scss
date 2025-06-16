@@ -1,26 +1,36 @@
 .gallery {
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
 
   &__title {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
     text-align: center;
-    color: #333;
+    color: var(--text-color);
   }
 
   &__grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
   }
 
   &__item {
-    background-color: #fff;
+    background-color: var(--item-bg-color);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--shadow-color);
     transition: transform 0.3s ease;
 
     &:hover {
@@ -33,17 +43,25 @@
     height: 200px;
     object-fit: cover;
     display: block;
+
+    @media (max-width: 768px) {
+      height: 150px;
+    }
+
+    @media (max-width: 480px) {
+      height: 120px;
+    }
   }
 
   &__caption {
     padding: 0.75rem 1rem;
     font-size: 1rem;
     text-align: center;
-    color: #555;
+    color: var(--caption-color);
   }
 
   &__backLinkWrapper,
-  &__moreLinkWrapper {
+  &__linkWrapper {
     margin: 1.5rem 0;
     text-align: center;
   }
@@ -51,13 +69,12 @@
   &__backLink,
   &__moreLink {
     font-size: 1rem;
-    color: #0070f3;
+    color: var(--accent-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
 
     &:hover {
-      color: #0051a3;
-    }
+  color: #0051a3;    }
   }
 }

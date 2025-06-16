@@ -17,7 +17,7 @@ export default function Teachers() {
 
   return (
     <div className={styles.container}>
-      <h1>Преподаватели</h1>
+      <h1 className={styles.title}>Преподаватели</h1>
       <div className={styles.grid}>
         {teachers.map(teacher => (
           <div
@@ -25,8 +25,8 @@ export default function Teachers() {
             key={teacher.id}
             onClick={() => router.push(`/teachers/${teacher.id}`)}
           >
-            {teacher.photo && (
-              <img 
+            {teacher.photo ? (
+              <img
                 src={
                   teacher.photo.startsWith('http')
                     ? teacher.photo
@@ -35,9 +35,11 @@ export default function Teachers() {
                 alt={teacher.name}
                 className={styles.image}
               />
+            ) : (
+              <div className={styles.imagePlaceholder}>Фото отсутствует</div>
             )}
             <h2>{teacher.name}</h2>
-            <p>{teacher.subject}</p>
+            {teacher.subject && <p>{teacher.subject}</p>}
           </div>
         ))}
       </div>

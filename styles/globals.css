@@ -1,19 +1,32 @@
 :root {
-  --bg-color: #ffffff;
-  --text-color: #222222;
-  --accent-color: #0077cc;
+  --bg-color: #f9f9f9;
+  --text-color: #333333;
+  --accent-color: #0070f3;
+  --accent-color-hover: #005bb5;      
+  --caption-color: #555555;
+  --item-bg-color: #ffffff;
+  --item-bg-color-light: #f3f3f3;    
+  --card-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-light: rgba(0, 0, 0, 0.03);
 }
 
 [data-theme='dark'] {
   --bg-color: #121212;
   --text-color: #e0e0e0;
   --accent-color: #00aaff;
+  --accent-color-hover: #0088cc;     
+  --caption-color: #bbbbbb;
+  --item-bg-color: #1e1e1e;
+  --item-bg-color-light: #2a2a2a;      
+  --card-bg: #1e1e1e;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-color-light: rgba(0, 0, 0, 0.15);
 }
 
 body {
-  margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }

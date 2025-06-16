@@ -6,12 +6,16 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Banner() {
   const [banners, setBanners] = useState([]);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     fetch(`${API_URL}/banners/`)
       .then(res => res.json())
       .then(setBanners)
       .catch(console.error);
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
   }, []);
 
   const settings = {
@@ -26,12 +30,12 @@ export default function Banner() {
   };
 
   return (
-    <Slider {...settings} className={styles.carousel}>
+    <Slider {...settings} className={`${styles.carousel} ${theme === 'dark' ? styles.dark : ''}`}>
       {banners.map((banner) => (
         <div key={banner.id} className={styles.slide}>
           <img
             src={banner.image.startsWith('http') ? banner.image : `${API_URL.replace('/api', '')}${banner.image}`}
-            alt="img"
+            alt={banner.title || 'banner image'}
             className={styles.image}
           />
           <div className={styles.overlay}>

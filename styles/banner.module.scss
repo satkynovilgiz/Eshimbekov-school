@@ -2,6 +2,20 @@
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
+
+  &.dark {
+    .overlay {
+      color: #ddd;
+    }
+
+    .button {
+      background-color: #ff8787;
+
+      &:hover {
+        background-color: #d95555;
+      }
+    }
+  }
 }
 
 .slide {
@@ -17,6 +31,9 @@
   object-fit: cover;
   filter: brightness(0.6);
   border-radius: 1rem;
+
+  // В тёмной теме можно чуть затемнить дополнительно, если нужно
+  // Можно использовать css-переменные для удобства (если у тебя в проекте)
 }
 
 .overlay {
@@ -33,11 +50,25 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 }
 
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 }
 
 .button {

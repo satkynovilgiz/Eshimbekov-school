@@ -1,27 +1,103 @@
 .about {
-  padding: 2rem;
-  background-color: #fdfdfd;
-  color: #333;
+  padding: 3rem 1.5rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
 
   h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    color: var(--accent-color);
+    word-break: break-word;
   }
 
   h2 {
-    margin-top: 2rem;
     font-size: 1.8rem;
-    color: #005bbb;
+    color: var(--accent-color);
+    margin-bottom: 0.8rem;
+    word-break: break-word;
   }
 
   p {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     line-height: 1.6;
+    margin: 0 0 1.5rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .block {
+    margin-bottom: 2.5rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dark mode */
+[data-theme='dark'] {
+  .about {
+    .block {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .about {
+    padding: 2rem 1rem;
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1.05rem;
+    }
+
+    .block {
+      padding: 1rem;
+    }
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .about {
+    padding: 1.5rem 0.75rem;
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+
+    .block {
+      padding: 0.8rem;
+    }
+  }
 }

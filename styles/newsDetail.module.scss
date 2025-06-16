@@ -2,26 +2,41 @@
   padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
-  background: #fff;
+  background-color: var(--item-bg-color);
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px var(--shadow-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+
+  @media (max-width: 900px) {
+    padding: 1.5rem 1rem;
+    max-width: 95%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0.75rem;
+  }
 }
 
 .backLink {
   display: inline-block;
   margin-bottom: 1rem;
-  color: #0070f3;
+  color: var(--accent-color);
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 
   &:hover {
     text-decoration: underline;
+    /* Вместо darken используем прозрачность */
+    color: rgba(var(--accent-rgb, 0, 112, 243), 0.8);
   }
 }
 
 .date {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--caption-color);
   margin-bottom: 1rem;
 }
 
@@ -29,7 +44,11 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #222;
+  color: var(--text-color);
+
+  @media (max-width: 600px) {
+    font-size: 1.6rem;
+  }
 }
 
 .image {
@@ -38,10 +57,20 @@
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  transition: box-shadow 0.3s ease;
+
+  @media (max-width: 600px) {
+    max-height: 280px;
+  }
 }
 
 .content {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-color);
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 }
