@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from '@/styles/Contact.module.scss';
 
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [response, setResponse] = useState(null);
@@ -12,7 +15,7 @@ function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:8000/api/contact/send/', {
+        const res = await fetch(`${API_URL}/contact/send/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

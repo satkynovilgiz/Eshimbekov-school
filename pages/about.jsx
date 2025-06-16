@@ -1,32 +1,48 @@
-import styles from '@/styles/About.module.scss'
+import styles from '@/styles/About.module.scss';
 
-export default function About() {
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+export default function About({ blocks }) {
   return (
     <main className={styles.about}>
       <section className={styles.container}>
         <h1>О нашей школе</h1>
-        <p>
-          Добро пожаловать в нашу школу! Мы стремимся предоставить качественное образование, используя
-          современные методики и технологии. Наша команда профессионалов готова поддержать каждого ученика
-          на пути к знаниям.
-        </p>
-
-        <h2>Наша миссия</h2>
-        <p>
-          Мы верим, что образование должно быть доступным, интересным и вдохновляющим. Наша миссия — раскрыть
-          потенциал каждого ученика и помочь ему добиться успеха в жизни.
-        </p>
-
-        <h2>Почему выбирают нас</h2>
-        <ul>
-          <li>Опытные и квалифицированные преподаватели</li>
-          <li>Индивидуальный подход к каждому ученику</li>
-          <li>Современные технологии и учебные материалы</li>
-          <li>Дружественная атмосфера и поддержка</li>
-        </ul>
-
-      
+        {blocks.length === 0 ? (
+          <p>Информация пока недоступна.</p>
+        ) : (
+          blocks.map((block, index) => (
+            <div key={index}>
+              <h2>{block.title}</h2>
+              <p>{block.content}</p>
+            </div>
+          ))
+        )}
       </section>
     </main>
   );
+}
+
+
+export async function getServerSideProps() {
+  try {
+    const res = await fetch(`${API_URL}/about/`, {
+      headers: { 'Accept': 'application/json' },
+    });
+
+    if (!res.ok) {
+      console.error('Ошибка API:', res.status, res.statusText);
+      return { props: { blocks: [] } };
+    }
+
+    const json = await res.json();
+
+    return {
+      props: {
+        blocks: json.blocks || [],
+      },
+    };
+  } catch (error) {
+    console.error('Ошибка запроса:', error);
+    return { props: { blocks: [] } };
+  }
 }
