@@ -1,87 +1,99 @@
-.carousel {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
+.banner {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 2.5rem 1rem;
 
-  &.dark {
-    .overlay {
-      color: #ddd;
+  .content {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .left {
+    flex: 1 1 50%;
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent-color);
+
+      @media (max-width: 768px) {
+        font-size: 1.8rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.4rem;
+      }
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+
+      @media (max-width: 768px) {
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.8rem;
+      }
     }
 
     .button {
-      background-color: #ff8787;
+      background-color: var(--accent-color);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      font-size: 1rem;
 
       &:hover {
-        background-color: #d95555;
+        background-color: #cc4b4b;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.8rem;
       }
     }
   }
-}
 
-.slide {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .right {
+    flex: 1 1 45%;
+    display: flex;
+    justify-content: center;
 
-.image {
-  width: 100%;
-  height: 60vh;
-  object-fit: cover;
-  filter: brightness(0.6);
-  border-radius: 1rem;
+    .image {
+      max-width: 120%;
+      border-radius: 10px;
+      // box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 
-  // В тёмной теме можно чуть затемнить дополнительно, если нужно
-  // Можно использовать css-переменные для удобства (если у тебя в проекте)
-}
-
-.overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  text-align: center;
-  padding: 1.5rem;
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+      @media (max-width: 480px) {
+        border-radius: 8px;
+      }
+    }
+  }
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-  @media (max-width: 480px) {
-    font-size: 1.5rem;
-  }
-}
+    .content {
+      flex-direction: column;
+      text-align: center;
+    }
 
-.subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-  @media (max-width: 480px) {
-    font-size: 0.9rem;
-  }
-}
-
-.button {
-  display: inline-block;
-  background-color: #ff6b6b;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #e24e4e;
+    .left,
+    .right {
+      flex: 1 1 100%;
+    }
   }
 }

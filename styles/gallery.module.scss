@@ -75,6 +75,22 @@
     transition: color 0.3s;
 
     &:hover {
-  color: #0051a3;    }
+      color: #0051a3;
+    }
+  }
+}
+
+/* Новый контейнер для центрирования и отступов */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.5rem;
   }
 }

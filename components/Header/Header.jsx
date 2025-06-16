@@ -58,8 +58,34 @@ export default function Header() {
           <NavLink href="/teachers">Учителя</NavLink>
           <NavLink href="/news">Новости</NavLink>
           <NavLink href="/contact">Контакты</NavLink>
+
+          {/* Контролы внутри меню — показываем только на мобильных */}
+          <div className={styles.mobileControls}>
+            <select
+              value={language}
+              onChange={handleLanguageChange}
+              className={styles.languageSelect}
+              aria-label="Выбор языка"
+            >
+              {LANGUAGES.map((lang) => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.label}
+                </option>
+              ))}
+            </select>
+
+            <button
+              onClick={toggleTheme}
+              className={styles.themeToggle}
+              aria-label="Переключить тему"
+              type="button"
+            >
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
+          </div>
         </nav>
 
+        {/* Контролы вне меню — показываем только на десктопах */}
         <div className={styles.controls}>
           <select
             value={language}
@@ -74,18 +100,24 @@ export default function Header() {
             ))}
           </select>
 
-          <button onClick={toggleTheme} className={styles.themeToggle} aria-label="Переключить тему">
+          <button
+            onClick={toggleTheme}
+            className={styles.themeToggle}
+            aria-label="Переключить тему"
+            type="button"
+          >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={styles.burger}
-            aria-label="Меню"
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
+
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className={styles.burger}
+          aria-label="Меню"
+          type="button"
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
     </header>
   );

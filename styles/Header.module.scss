@@ -71,15 +71,28 @@
     }
   }
 
+  /* Контролы для десктопа */
   .controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
     @media (max-width: 768px) {
-      width: auto;
-      justify-content: flex-end;
-      margin-top: 0;
+      display: none; // скрываем на мобильных
+    }
+  }
+
+  /* Контролы, которые появляются внутри меню на мобилках */
+  .mobileControls {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: flex;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      width: 100%;
+      justify-content: center;
+      border-top: 1px solid var(--accent-color);
     }
   }
 

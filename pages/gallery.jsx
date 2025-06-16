@@ -27,43 +27,45 @@ const Gallery = () => {
 
   return (
     <section className={styles.gallery}>
-      {!isMainPage && (
-        <div className={styles.backLinkWrapper}>
-         <Link href="/" className={styles.gallery__backLink}>
-  ← На главную
-</Link>
-        </div>
-      )}
+      <div className={styles.container}>
+        {!isMainPage && (
+          <div className={styles.backLinkWrapper}>
+            <Link href="/" className={styles.gallery__backLink}>
+              ← На главную
+            </Link>
+          </div>
+        )}
 
-      <h2 className={styles.gallery__title}>Галерея</h2>
+        <h2 className={styles.gallery__title}>Галерея</h2>
 
-      {loading ? (
-        <p className={styles.gallery__caption}>Загрузка...</p>
-      ) : images.length === 0 ? (
-        <p className={styles.gallery__caption}>Пока нет фотографий</p>
-      ) : (
-        <div className={styles.gallery__grid}>
-          {images.map((img) => (
-            <div className={styles.gallery__item} key={img.id}>
-              <img
-                src={img.image}
-                alt={img.title}
-                className={styles.gallery__image}
-                loading="lazy"
-              />
-              <p className={styles.gallery__caption}>{img.title}</p>
-            </div>
-          ))}
-        </div>
-      )}
+        {loading ? (
+          <p className={styles.gallery__caption}>Загрузка...</p>
+        ) : images.length === 0 ? (
+          <p className={styles.gallery__caption}>Пока нет фотографий</p>
+        ) : (
+          <div className={styles.gallery__grid}>
+            {images.map((img) => (
+              <div className={styles.gallery__item} key={img.id}>
+                <img
+                  src={img.image}
+                  alt={img.title}
+                  className={styles.gallery__image}
+                  loading="lazy"
+                />
+                <p className={styles.gallery__caption}>{img.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
-      {isMainPage && (
-        <div className={styles.linkWrapper}>
-    <Link href="/gallery" className={styles.gallery__moreLink}>
-  Больше галереи →
-</Link>
-        </div>
-      )}
+        {isMainPage && (
+          <div className={styles.linkWrapper}>
+            <Link href="/gallery" className={styles.gallery__moreLink}>
+              Больше галереи →
+            </Link>
+          </div>
+        )}
+      </div>
     </section>
   );
 };

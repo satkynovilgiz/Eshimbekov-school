@@ -1,54 +1,47 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import Link from 'next/link';
 import styles from '@/styles/banner.module.scss';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Banner() {
-  const [banners, setBanners] = useState([]);
-  const [theme, setTheme] = useState('light');
+  const [banner, setBanner] = useState(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/banners/`)
-      .then(res => res.json())
-      .then(setBanners)
-      .catch(console.error);
+    const fetchBanner = async () => {
+      try {
+        const res = await fetch(`${API_URL}/banners/`);
+        const data = await res.json();
+        setBanner(data[0]);
+      } catch (error) {
+        console.error('Ошибка при загрузке баннера:', error);
+      }
+    };
 
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
+    fetchBanner();
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-  };
+  if (!banner) return null;
 
   return (
-    <Slider {...settings} className={`${styles.carousel} ${theme === 'dark' ? styles.dark : ''}`}>
-      {banners.map((banner) => (
-        <div key={banner.id} className={styles.slide}>
-          <img
-            src={banner.image.startsWith('http') ? banner.image : `${API_URL.replace('/api', '')}${banner.image}`}
-            alt={banner.title || 'banner image'}
-            className={styles.image}
-          />
-          <div className={styles.overlay}>
-            <h2 className={styles.title}>{banner.title}</h2>
-            {banner.subtitle && <p className={styles.subtitle}>{banner.subtitle}</p>}
-            {banner.button_url && banner.button_text && (
-              <a href={banner.button_url} className={styles.button}>
-                {banner.button_text}
-              </a>
-            )}
-          </div>
+    <section className={styles.banner}>
+      <div className={styles.content}>
+        <div className={styles.left}>
+          <h1>{banner.title}</h1>
+          <p>{banner.subtitle}</p>
+          {banner.button_url && banner.button_text && (
+            <Link href={banner.button_url} className={styles.button}>
+              {banner.button_text}
+            </Link>
+          )}
         </div>
-      ))}
-    </Slider>
+
+        <div className={styles.right}>
+          <img src={banner.image} alt="Баннер" className={styles.image} />
+        </div>
+      </div>
+    </section>
   );
 }
