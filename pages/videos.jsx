@@ -15,7 +15,6 @@ export default function Videos() {
       .catch((err) => console.error("Ошибка загрузки видео:", err));
   }, []);
 
-  // Функция для извлечения id видео из YouTube URL
   function getYouTubeId(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
